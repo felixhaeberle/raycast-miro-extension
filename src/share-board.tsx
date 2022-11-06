@@ -4,6 +4,7 @@
 import { BoardMember } from "@mirohq/miro-api";
 import { Action, ActionPanel, Detail, Form, showToast, Toast } from "@raycast/api";
 import { useEffect, useState } from "react";
+import { capitalizeFirstLetter } from "./helpers";
 import * as miro from "./oauth/miro";
 
 interface ShareBoardProps {
@@ -18,10 +19,6 @@ export default function ShareBoard({ id }: { id: string }) {
   const [boardMembers, setBoardMembers] = useState<BoardMember[]>([]);
   const [selectedBoardMember, setSelectedBoardMember] = useState<string>("");
   const [currentRole, setCurrentRole] = useState<BoardMember["role"]>("Guest");
-
-  const capitalizeFirstLetter = (string: string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
 
   useEffect(() => {
     (async () => {

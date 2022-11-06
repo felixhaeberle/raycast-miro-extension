@@ -182,3 +182,42 @@ export async function getBoardMembers(id: string): Promise<BoardMember[]> {
   const json = (await response.json()) as { data: BoardMember[] };
   return json.data;
 }
+
+// remove board member
+export async function removeBoardMember(id: string, memberId: string): Promise<boolean> {
+  const response = await fetch(`https://api.miro.com/v2/boards/${id}/members/${memberId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${(await client.getTokens())?.accessToken}`,
+    },
+  });
+
+  if (!response.ok) {
+    console.error("remove member error:", await response.text());
+    throw new Error(response.statusText);
+  }
+
+  return true;
+}
+
+// change board member role
+export async function changeBoardMemberRole(id: string, memberId: string, role: BoardMember["role"]): Promise<boolean> {
+  const response = await fetch(`https://api.miro.com/v2/boards/${id}/members/${memberId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${(await client.getTokens())?.accessToken}`,
+    },
+    body: JSON.stringify({
+      role: role,
+    }),
+  });
+
+  if (!response.ok) {
+    console.error("change member role error:", await response.text());
+    throw new Error(response.statusText);
+  }
+
+  return true;
+}

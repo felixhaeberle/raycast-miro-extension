@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import * as miro from "./oauth/miro";
-import { Board, BoardMember } from "@mirohq/miro-api";
+import { Board } from "@mirohq/miro-api";
 import { Action, ActionPanel, Detail, Icon, List, showToast, Toast, useNavigation } from "@raycast/api";
-import ShareBoard from "./share-board";
 import InviteBoard from "./invite-board";
+import ListMembers from "./list-member";
 
 export default function ListBoards() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -50,7 +50,11 @@ export default function ListBoards() {
                       title="Invite to Board"
                       icon={Icon.PersonCircle}
                       onAction={() => push(<InviteBoard id={item.id} />)}
-                      shortcut={{ modifiers: ["cmd"], key: "i" }}
+                    />
+                    <Action
+                      title={"Edit board members"}
+                      icon={Icon.PersonCircle}
+                      onAction={() => push(<ListMembers id={item.id} />)}
                     />
                   </>
                 )}
