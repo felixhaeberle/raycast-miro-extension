@@ -50,11 +50,13 @@ export default function ListBoards() {
                       title="Invite to Board"
                       icon={Icon.PersonCircle}
                       onAction={() => push(<InviteBoard id={item.id} />)}
+                      shortcut={{ modifiers: ["cmd"], key: "i" }}
                     />
                     <Action
-                      title={"Edit board members"}
+                      title={"Show board members"}
                       icon={Icon.PersonCircle}
                       onAction={() => push(<ListMembers id={item.id} />)}
+                      shortcut={{ modifiers: ["cmd"], key: "m" }}
                     />
                   </>
                 )}

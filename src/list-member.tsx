@@ -1,8 +1,10 @@
 import { BoardMember } from "@mirohq/miro-api";
 import { Action, ActionPanel, Detail, Icon, List, showToast, Toast, useNavigation } from "@raycast/api";
 import { useEffect, useState } from "react";
+import ChangeRole from "./change-role";
 import { capitalizeFirstLetter } from "./helpers";
 import * as miro from './oauth/miro';
+import RemoveMember from "./remove-member";
 
 export default function ListMembers ({ id }: { id: string }) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -42,13 +44,13 @@ export default function ListMembers ({ id }: { id: string }) {
                 <Action
                   title="Change role"
                   icon={Icon.PersonCircle}
-                  onAction={() => console.log("change role")}
+                  onAction={() => push(<ChangeRole {...{id, memberId: member.id.toString(), role: member.role}}/>)}
                   shortcut={{ modifiers: ["cmd"], key: "enter" }}
                 />
                 <Action
                   title={"Remove from board"}
                   icon={Icon.RemovePerson}
-                  onAction={() => console.log("remove from board")}
+                  onAction={() => push(<RemoveMember {...{id, memberId: member.id.toString()}} />)}
                   shortcut={{ modifiers: ["cmd"], key: "return" }}
                 />
               </ActionPanel>
