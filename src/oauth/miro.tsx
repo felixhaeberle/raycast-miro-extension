@@ -3,7 +3,7 @@ import fetch from "node-fetch";
 import { Board, BoardMember } from "@mirohq/miro-api";
 
 // Miro App client ID
-const clientId = "3458764537065046460";
+const clientId = "3458764538138428083";
 
 const client = new OAuth.PKCEClient({
   redirectMethod: OAuth.RedirectMethod.Web,
@@ -24,7 +24,7 @@ export async function authorize() {
   }
 
   const authRequest = await client.authorizationRequest({
-    endpoint: "https://raycast-miro-pkce-proxy.up.railway.app/authorize",
+    endpoint: "https://miro.oauth-proxy.raycast.com/authorize",
     clientId: clientId,
     scope: "",
   });
@@ -37,7 +37,7 @@ export async function fetchTokens(
   authRequest: OAuth.AuthorizationRequest,
   authCode: string
 ): Promise<OAuth.TokenResponse> {
-  const response = await fetch("https://raycast-miro-pkce-proxy.up.railway.app/token", {
+  const response = await fetch("https://miro.oauth-proxy.raycast.com/token", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -57,7 +57,7 @@ export async function fetchTokens(
 
 // Refresh tokens
 async function refreshTokens(refreshToken: string): Promise<OAuth.TokenResponse> {
-  const response = await fetch("https://raycast-miro-pkce-proxy.up.railway.app/refresh-token", {
+  const response = await fetch("https://miro.oauth-proxy.raycast.com/refresh-token", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
