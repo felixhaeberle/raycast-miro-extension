@@ -7,7 +7,6 @@ import {
   Detail,
   Icon,
   List,
-  popToRoot,
   showToast,
   Toast,
   useNavigation,
@@ -16,7 +15,6 @@ import { useEffect, useState } from "react";
 import ChangeRole from "./change-role";
 import { capitalizeFirstLetter } from "./helpers";
 import * as miro from "./oauth/miro";
-import RemoveMember from "./remove-member";
 
 export default function ListMembers({ id }: { id: string }) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
